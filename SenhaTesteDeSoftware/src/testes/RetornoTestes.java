@@ -17,48 +17,49 @@ public class RetornoTestes {
 		retorno = new Retorno();
 	}
 
-	@Test (expected=CorInvalidaException.class)
-	public void adicionarPinoTestePinoCorBrancoQuantidadePinosNegativo() throws CorInvalidaException {
-		retorno.setPinosInseridos(-1);
-		retorno.adicionarPino("branco");
-		
-		fail("A quantidade de pinos inserido no retorno é negativo, mas não foi lançada nenhuma exceção");
-	}
 	
-	@Test
+	/*@Test
 	public void adicionarPinoTestePinoCorPretoQuantidadePinosZero() throws CorInvalidaException {
 		retorno.setPinosInseridos(0);
 		retorno.adicionarPino("preto");
 		
 		assertEquals("preto", retorno.getRetorno()[0]);
+	}*/
+
+	@Test
+	public void adicionarPinoTestePinoCorPretoQuantidadePinosZeroStringConcat() throws CorInvalidaException {
+		retorno.setPinosInseridos(0);
+		String preto = "pre"; preto.concat("to");
+		retorno.adicionarPino(preto);
+		
+		assertEquals(preto, retorno.getRetorno()[0]);
 	}
-	
+
+
 	@Test
 	public void adicionarPinoTestePinoCorBrancoQuantidadePinosTres() throws CorInvalidaException {
 		String [] retornoString = {"preto", "branco", "nenhum", "nenhum"};
 		retorno.setRetorno(retornoString);		
 		retorno.setPinosInseridos(3);
-		retorno.adicionarPino("branco");
+		String branco = "bran"; branco.concat("co");
+		retorno.adicionarPino(branco);
 		
-		assertEquals("branco", retorno.getRetorno()[3]);
-	}
-	
-	@Test
-	public void adicionarPinoTestePinoCorAmareloQuantidadePinosTres() {
-		try{
-			String [] retornoString = {"preto", "branco", "nenhum", "nenhum"};
-			retorno.setRetorno(retornoString);		
-			retorno.setPinosInseridos(3);
-			retorno.adicionarPino("amarelo");
-			
-			fail("Cor 'amarelo' é invalida, mas nenhuma exceção foi lançada");
-		}catch(CorInvalidaException e){
-			
-		}
+		assertEquals(branco, retorno.getRetorno()[3]);
 	}
 	
 	@Test (expected=CorInvalidaException.class)
-	public void adicionarPinoTestePinoCorRoxoQuantidadePinosQuatro() throws CorInvalidaException {
+	public void adicionarPinoTestePinoCorAmareloQuantidadePinosTres() throws CorInvalidaException {
+		String [] retornoString = {"preto", "branco", "nenhum", "nenhum"};
+		retorno.setRetorno(retornoString);		
+		retorno.setPinosInseridos(3);
+		String amarelo = "amarel"; amarelo.concat("o");
+		retorno.adicionarPino(amarelo);
+		
+		fail("Cor 'amarelo' é invalida, mas nenhuma exceção foi lançada");
+	}
+	
+	@Test (expected=PosicaoInvalidaException.class)
+	public void adicionarPinoTestePinoCorRoxoQuantidadePinosQuatro() throws CorInvalidaException, PosicaoInvalidaException {
 		String [] retornoString = {"preto", "branco", "branco", "branco"};
 		retorno.setRetorno(retornoString);		
 		retorno.setPinosInseridos(5);
