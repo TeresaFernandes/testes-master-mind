@@ -17,7 +17,7 @@ public class RetornoTestes {
 		retorno = new Retorno();
 	}
 
-	@Test
+	@Test (expected=CorInvalidaException.class)
 	public void adicionarPinoTestePinoCorBrancoQuantidadePinosNegativo() throws CorInvalidaException {
 		retorno.setPinosInseridos(-1);
 		retorno.adicionarPino("branco");
@@ -57,7 +57,7 @@ public class RetornoTestes {
 		}
 	}
 	
-	@Test
+	@Test (expected=CorInvalidaException.class)
 	public void adicionarPinoTestePinoCorRoxoQuantidadePinosQuatro() throws CorInvalidaException {
 		String [] retornoString = {"preto", "branco", "branco", "branco"};
 		retorno.setRetorno(retornoString);		
@@ -67,18 +67,13 @@ public class RetornoTestes {
 		fail("A quantidade de pinos inserido no retorno excede o tamanho do array, mas não foi lançada nenhuma exceção");
 	}
 	
-	@Test
-	public void getPinoTestePosicaoNegativa() {
+	@Test  (expected=PosicaoInvalidaException.class)
+	public void getPinoTestePosicaoNegativa() throws PosicaoInvalidaException{
+		String [] retornoString = {"preto", "preto", "nenhum", "nenhum"};
+		retorno.setRetorno(retornoString);
 		
-		try{
-			String [] retornoString = {"preto", "preto", "nenhum", "nenhum"};
-			retorno.setRetorno(retornoString);
-			
-			retorno.getPino(-1);
-			fail("O numero da posição não está no intervalo 0<=posição<=3");
-		}catch (PosicaoInvalidaException e){
-			
-		}
+		retorno.getPino(-1);
+		fail("O numero da posição não está no intervalo 0<=posição<=3");
 	}
 	
 	@Test
@@ -90,18 +85,13 @@ public class RetornoTestes {
 		assertEquals("branco",retorno.getPino(3));
 	}
 	
-	@Test
-	public void getPinoTestePosicaoMaiorQueTres() {
+	@Test  (expected=PosicaoInvalidaException.class)
+	public void getPinoTestePosicaoMaiorQueTres() throws PosicaoInvalidaException {
+		String [] retornoString = {"preto", "preto", "branco", "branco"};
+		retorno.setRetorno(retornoString);
 		
-		try{
-			String [] retornoString = {"preto", "preto", "branco", "branco"};
-			retorno.setRetorno(retornoString);
-			
-			retorno.getPino(5);
-			fail("O numero da posição não está no intervalo 0<=posição<=3");
-		}catch (PosicaoInvalidaException e){
-			
-		}
+		retorno.getPino(5);
+		fail("O numero da posição não está no intervalo 0<=posição<=3");
 	}
 	
 	@Test
