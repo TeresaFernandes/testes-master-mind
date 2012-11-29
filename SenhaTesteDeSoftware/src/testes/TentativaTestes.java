@@ -1,6 +1,8 @@
 package testes;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 import jogo.CorInvalidaException;
 import jogo.PosicaoInvalidaException;
@@ -52,6 +54,16 @@ public class TentativaTestes {
 	}
 	
 	@Test
+	public void adicionarPinoTestePosicao3CorLilas() throws PosicaoInvalidaException, CorInvalidaException {
+		
+		String [] tentativaString = {"vermelho", "rosa", "azul", "amarelo"};
+		tentativa.setTentativa(tentativaString);
+		tentativa.adicionarPino(3, "roxo");
+		
+		assertEquals("roxo", tentativa.getTentativa()[3]);
+	}
+	
+	@Test
 	public void getPinoTestePosicaoNegativa() {
 		
 		try{
@@ -71,7 +83,7 @@ public class TentativaTestes {
 		String [] tentativaString = {"vermelho", "rosa", "roxo", "verde"};
 		tentativa.setTentativa(tentativaString);
 		
-		assertEquals(tentativa.getTentativa()[3],tentativa.getPino(3));
+		assertEquals("verde",tentativa.getPino(3));
 	}
 	
 	@Test
@@ -86,6 +98,77 @@ public class TentativaTestes {
 		}catch (PosicaoInvalidaException e){
 			
 		}
+	}
+	
+	@Test
+	public void getPinoTestePosicaoIgualZero() throws PosicaoInvalidaException {
+		
+		String [] tentativaString = {"nenhum", "nenhum", "nenhum", "nenhum"};
+		tentativa.setTentativa(tentativaString);
+		
+		assertEquals("nenhum",tentativa.getPino(0));
+	}
+	
+	@Test
+	public void ehTentativaIncompletaTesteSemPinosInseridos() {
+		
+		assertTrue(tentativa.ehTentativaIncompleta());
+	}
+	
+	@Test
+	public void ehTentativaIncompletaTesteComTodosPinosInseridos() {
+		String [] tentativaString = {"vermelho", "rosa", "roxo", "verde"};
+		tentativa.setTentativa(tentativaString);
+	
+		assertFalse(tentativa.ehTentativaIncompleta());
+	}
+	
+	@Test
+	public void ehTentativaIncompletaTesteComAlgunsPinosInseridos() {
+		String [] tentativaString = {"vermelho", "rosa", "nenhum", "nenhum"};
+		tentativa.setTentativa(tentativaString);
+	
+		assertTrue(tentativa.ehTentativaIncompleta());
+	}
+	
+	@Test
+	public void quantosPinosJaForamAdicionadosTesteSemPinosInseridos() {
+		
+		assertEquals(0,tentativa.quantosPinosJaForamAdicionados());
+	}
+	
+	@Test
+	public void quantosPinosJaForamAdicionadosTesteComTodosPinosInseridos() {
+		String [] tentativaString = {"vermelho", "rosa", "roxo", "verde"};
+		tentativa.setTentativa(tentativaString);
+	
+		assertEquals(4,tentativa.quantosPinosJaForamAdicionados());
+	}
+	
+	@Test
+	public void quantosPinosJaForamAdicionadosTesteComAlgunsPinosInseridos() {
+		String [] tentativaString = {"vermelho", "rosa", "nenhum", "nenhum"};
+		tentativa.setTentativa(tentativaString);
+	
+		assertEquals(2,tentativa.quantosPinosJaForamAdicionados());
+	}
+	
+	@Test
+	public void corEhValidaTesteCorNull() {
+		
+		assertFalse(tentativa.CorEhValida(null));
+	}
+	
+	@Test
+	public void corEhValidaTesteCorInvalida() {
+		
+		assertFalse(tentativa.CorEhValida("lilas"));
+	}
+	
+	@Test
+	public void corEhValidaTesteCorValida() {
+		
+		assertTrue(tentativa.CorEhValida("azul"));
 	}
 
 }

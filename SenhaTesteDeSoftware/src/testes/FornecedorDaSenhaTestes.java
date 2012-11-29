@@ -43,6 +43,8 @@ public class FornecedorDaSenhaTestes {
 
 	}
 
+	
+	
 	@Test
 	public void jogarTesteTentativaIgualASenha() {
 		String [] tentativaString = {"vermelho", "rosa", "roxo", "verde"};
@@ -99,4 +101,22 @@ public class FornecedorDaSenhaTestes {
 		assertTrue(retornoValido);
 	}
 
+	@Test
+	public void jogarTesteTentativaNula() {
+		
+		Tentativa tentativa = new Tentativa();
+		Jogada jogada = new Jogada();
+		jogada.setTentativa(tentativa);		
+		fornecedor.setJogada(jogada);
+		
+		String [] senhaString = {"vermelho", "rosa", "roxo", "verde"};
+		Senha senha = new Senha();
+		senha.setSenha(senhaString);
+		senha.setPinosInseridos(4);
+		fornecedor.setSenha(senha);
+		
+		fornecedor.jogar();
+		
+		fail("O array de valores da Tentativa é nulo, e nenhuma exceção foi lançada");
+	}
 }

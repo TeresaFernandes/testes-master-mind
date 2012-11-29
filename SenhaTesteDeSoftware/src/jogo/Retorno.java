@@ -12,6 +12,10 @@ public class Retorno
 	 */
 	private int pinosInseridos;
 	
+	public void setPinosInseridos(int i){
+		pinosInseridos = i;
+	}
+	
 	/**
 	 * Representação do retorno para o Adivinho indicando se ele 
 	 * acertou a posição -ou- posição e cor de um pino na tentativa
@@ -23,6 +27,10 @@ public class Retorno
 	
 	public String[] getRetorno(){
 		return retorno;
+	}
+	
+	public void setRetorno(String[] ret){
+		retorno=ret;
 	}
 	
 	public Retorno()
