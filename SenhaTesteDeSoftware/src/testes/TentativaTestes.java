@@ -20,61 +20,49 @@ public class TentativaTestes {
 		tentativa = new Tentativa();
 	}
 
-	@Test
-	public void adicionarPinoTestePosicaoNegativaCorVermelho() throws CorInvalidaException{
-		try{
-			tentativa.adicionarPino(-2, "vermelho");
-			fail("O numero da posição não está no intervalo 0<=posição<=3");
-		}catch(PosicaoInvalidaException e){
-			
-		}
+	@Test (expected=PosicaoInvalidaException.class)
+	public void adicionarPinoTestePosicaoNegativaCorVermelho() throws CorInvalidaException, PosicaoInvalidaException{
+		String vermelho="vermelh"; vermelho.concat("o");
+		tentativa.adicionarPino(-2, vermelho);
+		fail("O numero da posição não está no intervalo 0<=posição<=3");
 	}
 
 	@Test
 	public void adicionarPinoTestePosicaoZeroCorAzul() throws CorInvalidaException, PosicaoInvalidaException{
-		
-		tentativa.adicionarPino(0, "azul");
+		String azul = "azu"; azul.concat("l");
+		tentativa.adicionarPino(0, azul);
 		
 		String [] tentativaString = tentativa.getTentativa();
-		assertEquals("azul",tentativaString[0]);
+		assertEquals(azul,tentativaString[0]);
 	}
 
-	@Test
-	public void adicionarPinoTestePosicao4CorLilas() {
-		try{
-			String [] tentativaString = {"vermelho", "rosa", "nenhum", "nenhum"};
-			tentativa.setTentativa(tentativaString);
-			tentativa.adicionarPino(4, "lilas");
-			fail("A cor do pino não é válida e o numero da posição não está no intervalo 0<=posição<=3");
-		}catch(CorInvalidaException e){
-			
-		}catch (PosicaoInvalidaException e){
-			
-		}
+	@Test (expected=PosicaoInvalidaException.class)
+	public void adicionarPinoTestePosicao4CorLilas() throws PosicaoInvalidaException, CorInvalidaException {
+		String [] tentativaString = {"vermelho", "rosa", "nenhum", "nenhum"};
+		tentativa.setTentativa(tentativaString);
+		tentativa.adicionarPino(4, "lilas");
+		fail("A cor do pino não é válida e o numero da posição não está no intervalo 0<=posição<=3");
 	}
 	
 	@Test
-	public void adicionarPinoTestePosicao3CorLilas() throws PosicaoInvalidaException, CorInvalidaException {
+	public void adicionarPinoTestePosicao3CorRoxo() throws PosicaoInvalidaException, CorInvalidaException {
 		
 		String [] tentativaString = {"vermelho", "rosa", "azul", "amarelo"};
 		tentativa.setTentativa(tentativaString);
-		tentativa.adicionarPino(3, "roxo");
+		String roxo = "rox"; roxo.concat("o");
+		tentativa.adicionarPino(3, roxo);
 		
-		assertEquals("roxo", tentativa.getTentativa()[3]);
+		assertEquals(roxo, tentativa.getTentativa()[3]);
 	}
 	
-	@Test
-	public void getPinoTestePosicaoNegativa() {
+	@Test (expected=PosicaoInvalidaException.class)
+	public void getPinoTestePosicaoNegativa() throws PosicaoInvalidaException {
+	
+		String [] tentativaString = {"vermelho", "rosa", "nenhum", "nenhum"};
+		tentativa.setTentativa(tentativaString);
 		
-		try{
-			String [] tentativaString = {"vermelho", "rosa", "nenhum", "nenhum"};
-			tentativa.setTentativa(tentativaString);
-			
-			tentativa.getPino(-1);
-			fail("O numero da posição não está no intervalo 0<=posição<=3");
-		}catch (PosicaoInvalidaException e){
-			
-		}
+		tentativa.getPino(-1);
+		fail("O numero da posição não está no intervalo 0<=posição<=3");
 	}
 	
 	@Test
@@ -82,22 +70,17 @@ public class TentativaTestes {
 		
 		String [] tentativaString = {"vermelho", "rosa", "roxo", "verde"};
 		tentativa.setTentativa(tentativaString);
-		
-		assertEquals("verde",tentativa.getPino(3));
+		String verde = "verd"; verde.concat("e");
+		assertEquals(verde,tentativa.getPino(3));
 	}
 	
-	@Test
-	public void getPinoTestePosicaoMaiorQueTres() {
+	@Test (expected=PosicaoInvalidaException.class)
+	public void getPinoTestePosicaoMaiorQueTres() throws PosicaoInvalidaException {
+		String [] tentativaString = {"vermelho", "rosa", "roxo", "verde"};
+		tentativa.setTentativa(tentativaString);
 		
-		try{
-			String [] tentativaString = {"vermelho", "rosa", "roxo", "verde"};
-			tentativa.setTentativa(tentativaString);
-			
-			tentativa.getPino(5);
-			fail("O numero da posição não está no intervalo 0<=posição<=3");
-		}catch (PosicaoInvalidaException e){
-			
-		}
+		tentativa.getPino(5);
+		fail("O numero da posição não está no intervalo 0<=posição<=3");
 	}
 	
 	@Test
@@ -167,8 +150,8 @@ public class TentativaTestes {
 	
 	@Test
 	public void corEhValidaTesteCorValida() {
-		
-		assertTrue(tentativa.CorEhValida("azul"));
+		String azul = "azu"; azul.concat("l");
+		assertTrue(tentativa.CorEhValida(azul));
 	}
 
 }
