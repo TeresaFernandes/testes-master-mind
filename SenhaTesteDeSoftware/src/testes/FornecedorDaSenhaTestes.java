@@ -33,10 +33,10 @@ public class FornecedorDaSenhaTestes {
 		boolean coresValidas = true;
 		
 		for (int i = 0; i < senha.length; i++) {
-			coresValidas &= senha[i].equals("vermelho")|| senha[i].equals("azul")
-							|| senha[i].equals("rosa") || senha[i].equals("amarelo")
-							|| senha[i].equals("roxo") || senha[i].equals("verde")
-							|| senha[i].equals("cinza") || senha[i].equals("laranja");
+			coresValidas &= senha[i].compareTo("vermelho")==0|| senha[i].compareTo("azul")==0
+							|| senha[i].compareTo("rosa")==0 || senha[i].compareTo("amarelo")==0
+							|| senha[i].compareTo("roxo")==0 || senha[i].compareTo("verde")==0
+							|| senha[i].compareTo("cinza")==0 || senha[i].compareTo("laranja")==0;
 		}
 
 		assertTrue(coresValidas);
@@ -64,7 +64,7 @@ public class FornecedorDaSenhaTestes {
 		String[] retorno = fornecedor.getJogada().getRetorno().getRetorno();
 		boolean retornoValido=true;
 		for (int i = 0; i < retorno.length; i++) {
-			retornoValido &= retorno[i].equals("preto");
+			retornoValido &= retorno[i].compareTo("preto")==0;
 		}
 			
 		assertTrue(retornoValido);
@@ -92,16 +92,16 @@ public class FornecedorDaSenhaTestes {
 		for (int i = 0; i < retorno.length; i++) {
 			
 			if(i==2 || i==3){
-				retornoValido &= retorno[i].equals("preto");
+				retornoValido &= retorno[i].compareTo("preto")==0;
 			}else{
-				retornoValido &= retorno[i].equals("branco");
+				retornoValido &= retorno[i].compareTo("branco")==0;
 			}
 		}
 			
 		assertTrue(retornoValido);
 	}
 
-	@Test
+	@Test (expected=Exception.class)
 	public void jogarTesteTentativaNula() {
 		
 		Tentativa tentativa = new Tentativa();
